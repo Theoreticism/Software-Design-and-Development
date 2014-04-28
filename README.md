@@ -1,4 +1,4 @@
-Charlie-Plugins
+Software Design and Development
 ===============
 
 Plugins designed for use with a Blackjack program named Charlie created in Java by Professor Ron Coleman.
