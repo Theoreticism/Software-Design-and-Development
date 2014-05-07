@@ -13,7 +13,7 @@ import java.util.Map;
  * help from the advisor by checking the box for advice.
  * @author Christopher Lee
  */
-public class CharliePlugins implements IAdvisor {
+public class Advisor implements IAdvisor {
 
     Map<Pair<Integer,Integer>, Play> other = new HashMap<>();
     Map<Pair<Integer,Integer>, Play> ace_hand = new HashMap<>();
@@ -21,9 +21,9 @@ public class CharliePlugins implements IAdvisor {
     
     
     /*
-     * CharliePlugins constructor, builds the ArrayLists and HashMaps 
+     * CharlieAdvisoructor, builds the ArrayLists and HashMaps 
      */
-    public CharliePlugins() {
+    public Advisor() {
         otherInitialize();
         aceHandInitialize();
         doubleHandInitialize();
