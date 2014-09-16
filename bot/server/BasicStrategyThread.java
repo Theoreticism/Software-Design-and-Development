@@ -1,6 +1,6 @@
 package charlie.bot.server;
 
-import charlie.advisor.CharliePlugins;
+import charlie.advisor.Advisor;
 import charlie.card.Card;
 import charlie.card.Hand;
 import charlie.dealer.Dealer;
@@ -15,7 +15,7 @@ import charlie.util.Play;
  */
 public class BasicStrategyThread implements Runnable {
     
-    private final CharliePlugins advisor = new CharliePlugins();
+    private final Advisor advisor = new Advisor();
     private final Hand botHand;
     private final Card upCard;
     private final Dealer dealer;

@@ -126,7 +126,7 @@ public class B9 implements IBot {
     }
 
     /**
-     * Insurance method stub.temp = values[0]
+     * Insurance method stub.
      */
     @Override
     public void insure() {

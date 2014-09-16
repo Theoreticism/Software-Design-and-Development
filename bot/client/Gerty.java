@@ -12,6 +12,7 @@ import charlie.view.AMoneyManager;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import static java.lang.Math.max;
 import java.util.List;
 import java.util.HashMap;
 //import org.slf4j.Logger;
@@ -28,9 +29,6 @@ public class Gerty implements IGerty {
     protected final int minBet = 5;
     protected final int X = 10;
     protected final int Y = 275;
-    protected final double VARIANCE = 1.30347889;
-    protected double advantage;
-    protected double fraction;
     protected double bankroll;
     protected double betTotal;
     protected double mean;
@@ -69,41 +67,20 @@ public class Gerty implements IGerty {
         
         moneyManager.clearBet();
         
-        //Advantage approxmations
-        if (count >= 5)
-            advantage = 0.05;
-        else if (count == 4)
-            advantage = 0.04;
-        else if (count == 3)
-            advantage = 0.03;
-        else if (count == 2)
-            advantage = 0.02;
-        else if (count == 1)
-            advantage = 0.01;
-        else 
-            advantage = 0;
-        
-        fraction = advantage / VARIANCE;
-        
         bankroll = moneyManager.getBankroll();
         
         //Minimum bet, main bets only, no side bets
-        int tempBet;
-        if (fraction <= 0) {
-            tempBet = minBet;
-            moneyManager.upBet(tempBet);
-        } else {
-            tempBet = (int)((fraction * bankroll) - ((fraction * bankroll)%5));
-            for (int i = 0; i < tempBet; i = i + 5) {
-                moneyManager.upBet(minBet);
-            }
+        int tempBet = max(1, 1 + count) * minBet;
+        
+        for (int i = 0; i < tempBet; i = i + 5) {
+            moneyManager.upBet(minBet);
         }
+        
         gertyHid = courier.bet(tempBet, 0);
         if (tempBet > maxBet)
             maxBet = tempBet;
         betTotal += tempBet;
-        mean = betTotal / gameCount
-                ;
+        mean = betTotal / gameCount;
     }
 
     /**
@@ -301,7 +278,7 @@ public class Gerty implements IGerty {
             Play botPlay;
             
             try {
-                Thread.sleep(((int)(Math.random()*3) + 2) * 1000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 System.err.println("InterruptedException: " + e.getMessage());
                 Thread.currentThread().interrupt();
